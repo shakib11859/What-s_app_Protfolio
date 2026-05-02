@@ -1,4 +1,4 @@
-const chatData = {
+const chatDataEn = {
     terminal: {
         title: "Terminal Bot",
         icon: "terminal",
@@ -55,7 +55,7 @@ const chatData = {
             { type: 'received', text: "3. **End-user Support**: Providing technical troubleshooting and application enhancements." }
         ]
     },
-    education: {
+    edu: {
         title: "Education",
         icon: "graduation-cap",
         iconBg: "#a450ff",
@@ -87,6 +87,98 @@ const chatData = {
         ]
     }
 };
+
+const chatDataBn = {
+    terminal: {
+        title: "টার্মিনাল বট",
+        icon: "terminal",
+        iconBg: "#1e1e1e",
+        messages: [
+            { type: 'received', text: "পোর্টফোলিও টার্মিনালে স্বাগতম! 🖥️" },
+            { type: 'received', text: "হ্যালো! আমি শাকিবুল হাসান সোহাগ। 👋" },
+            { type: 'received', text: "উপলব্ধ কমান্ডসমূহ:\n• **about** - আমার সম্পর্কে\n• **skills** - টেক স্কিলস\n• **exp** - কাজের অভিজ্ঞতা\n• **projects** - প্রজেক্টসমূহ\n• **edu** - শিক্ষা\n• **contact** - যোগাযোগ\n• **clear** - টার্মিনাল মুছুন" }
+        ]
+    },
+    about: {
+        title: "আমার সম্পর্কে",
+        icon: "user",
+        iconBg: "#00a884",
+        messages: [
+            { type: 'received', text: "হ্যালো! আমি শাকিবুল হাসান সোহাগ। 👋" },
+            { type: 'received', text: "আমি একজন পরিশ্রমী এবং নমনীয় ব্যক্তি, যার বিভিন্ন ধরণের কাজে অভিজ্ঞতা রয়েছে। আমি দ্রুত নতুন জিনিস শিখতে পারি এবং বিভিন্ন পরিস্থিতিতে নিজেকে মানিয়ে নিতে পারি।" },
+            { type: 'received', text: "আমি সমস্যা সমাধান করতে, দলের সাথে কাজ করতে এবং ব্যবসায়িক লক্ষ্য অর্জনে সাহায্য করতে পছন্দ করি। আমি এমন একটি চাকরি খুঁজছি যেখানে আমি আমার দক্ষতা ব্যবহার করতে পারব, আরও শিখতে পারব এবং আমার ক্যারিয়ারে উন্নতি করতে পারব।" }
+        ]
+    },
+    skills: {
+        title: "টেকনিক্যাল স্কিলস",
+        icon: "code-2",
+        iconBg: "#34b7f1",
+        messages: [
+            { type: 'received', text: "এখানে আমার টেকনিক্যাল টুলকিট দেওয়া হলো: 🛠️" },
+            { type: 'received', text: "• **ERP সিস্টেম**: ব্যবস্থাপনা এবং সমস্যা সমাধানের দক্ষতা।" },
+            { type: 'received', text: "• **ওএস রক্ষণাবেক্ষণ**: উইন্ডোজ এবং ম্যাক অপারেটিং সিস্টেম রক্ষণাবেক্ষণ।" },
+            { type: 'received', text: "• **ওয়েব ডিজাইন**: এইচটিএমএল, সিএসএস, পিএসডি টু এইচটিএমএল।" },
+            { type: 'received', text: "• **এসইও**: অফ-পেজ এসইও (ব্যাকলিঙ্ক)।" },
+            { type: 'received', text: "• **হার্ডওয়্যার/সফটওয়্যার**: কম্পিউটার এবং প্রিন্টার/স্ক্যানার রক্ষণাবেক্ষণ ও সমস্যা সমাধান।" },
+            { type: 'received', text: "• **নেটওয়ার্কিং**: নেটওয়ার্ক সমস্যা সমাধান এবং রক্ষণাবেক্ষণ।" },
+            { type: 'received', text: "• **অফিস টুলস**: এমএস অফিস অ্যাডভান্সড, আউটলুক, এক্সেল।" }
+        ]
+    },
+    experience: {
+        title: "কাজের অভিজ্ঞতা",
+        icon: "briefcase",
+        iconBg: "#ffbc2c",
+        messages: [
+            { type: 'received', text: "আমার পেশাদার জীবন: 💼" },
+            { type: 'received', text: "**এমআইএস অফিসার (আইসিটি/এমআইএস)** | বিগ বস কর্পোরেশন লিমিটেড (অ্যাপটেক গ্রুপ)\n*চলমান*\nদায়িত্ব: ইআরপি সিস্টেম অ্যাডমিনিস্ট্রেশন, ম্যানেজমেন্টের জন্য রিপোর্ট তৈরি, ডেটা বৈষম্য তদন্ত এবং অ্যাপ্লিকেশন সাপোর্ট।" },
+            { type: 'received', text: "**কন্টেন্ট মডারেটর** | জেনেক্স ইনফোসিস লিমিটেড\n*মেয়াদ: ১ বছর*\nদায়িত্ব: প্রতিদিন প্রচুর পরিমাণে কন্টেন্ট পর্যালোচনা করার জন্য মডারেশন টুলস ব্যবহার করা।" }
+        ]
+    },
+    projects: {
+        title: "প্রজেক্টসমূহ",
+        icon: "layers",
+        iconBg: "#ff2c74",
+        messages: [
+            { type: 'received', text: "আমি বেশ কিছু চমৎকার প্রজেক্টে কাজ করেছি! 🚀" },
+            { type: 'received', text: "১. **ইআরপি অ্যাক্সেস অ্যাডমিনিস্ট্রেশন**: কর্পোরেট ইআরপি সিস্টেমের ইউজার অ্যাক্সেস ম্যানেজমেন্ট।" },
+            { type: 'received', text: "২. **ম্যানেজমেন্ট রিপোর্টিং**: ম্যানেজমেন্টের সিদ্ধান্তের জন্য নতুন বিশ্লেষণাত্মক রিপোর্ট তৈরি।" },
+            { type: 'received', text: "৩. **এন্ড-ইউজার সাপোর্ট**: কারিগরি সমস্যা সমাধান এবং অ্যাপ্লিকেশন উন্নত করা।" }
+        ]
+    },
+    edu: {
+        title: "শিক্ষা",
+        icon: "graduation-cap",
+        iconBg: "#a450ff",
+        messages: [
+            { type: 'received', text: "শিক্ষাগত যোগ্যতা: 🎓" },
+            { type: 'received', text: "**বিএসসি ইন সিএসই** | উত্তরা ইউনিভার্সিটি\n*অবস্থা: চলমান*\nবিভাগ: সিএসই | বোর্ড: প্রাইভেট" },
+            { type: 'received', text: "**ডিপ্লোমা ইন সিএসই** | খুলনা পলিটেকনিক ইনস্টিটিউট\n*ফলাফল: ৩.৪৬ / ৪.০০*\nপাশের বছর: ২০২৩ | বোর্ড: টেকনিক্যাল" },
+            { type: 'received', text: "**এসএসসি (বিজ্ঞান)** | জঙ্গল বাদল হাই স্কুল\n*ফলাফল: ৪.৮৯ / ৫.০০*\nপাশের বছর: ২০১৯ | বোর্ড: যশোর" }
+        ]
+    },
+    personal: {
+        title: "ব্যক্তিগত তথ্য",
+        icon: "info",
+        iconBg: "#007bff",
+        messages: [
+            { type: 'received', text: "অতিরিক্ত তথ্য: 📋" },
+            { type: 'received', text: "**পিতার নাম:** মো. সামসুল আলম\n**মাতার নাম:** মোসা. সালমা বেগম\n**জন্ম তারিখ:** ১৫/০২/২০০১\n**ধর্ম:** ইসলাম\n**রক্তের গ্রুপ:** ও+" },
+            { type: 'received', text: "**বর্তমান ঠিকানা:** ৩০ শরাবো, কাশিমপুর, গাজীপুর।\n**স্থায়ী ঠিকানা:** বসুন্দিয়া, সদর, যশোর।" }
+        ]
+    },
+    contact: {
+        title: "যোগাযোগ",
+        icon: "phone",
+        iconBg: "#25d366",
+        messages: [
+            { type: 'received', text: "যোগাযোগ করুন! 📞" },
+            { type: 'received', text: "📧 ইমেইল: shakibuls31@gmail.com\n📱 মোবাইল: +৮৮০১৮৭৩-৪৪১৫৬১" },
+            { type: 'received', text: "🔗 লিঙ্কডইন: [shakibul-hassan](https://www.linkedin.com/in/shakibul-hassan-861054290)" }
+        ]
+    }
+};
+
+let chatData = chatDataEn;
 
 const chatList = document.getElementById('chatList');
 const messagesContainer = document.getElementById('messagesContainer');
@@ -340,26 +432,200 @@ document.addEventListener('click', (e) => {
     }
 });
 
-// Theme Toggle Logic
+// Theme Toggle Logic (3-State Cycle: Dark -> Light -> Winter)
 const themeToggle = document.getElementById('themeToggle');
+const snowContainer = document.getElementById('snowContainer');
+let snowflakeInterval = null;
+
+function createSnowflake() {
+    if (!document.body.classList.contains('winter-theme')) return;
+    const snowflake = document.createElement('div');
+    snowflake.className = 'snowflake';
+    snowflake.innerHTML = '❄';
+    snowflake.style.left = Math.random() * 100 + 'vw';
+    snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
+    snowflake.style.opacity = Math.random();
+    snowflake.style.fontSize = Math.random() * 10 + 10 + 'px';
+    
+    snowContainer.appendChild(snowflake);
+    
+    setTimeout(() => {
+        snowflake.remove();
+    }, 5000);
+}
+
 if (themeToggle) {
     themeToggle.addEventListener('click', () => {
         const body = document.body;
-        body.classList.toggle('light-theme');
         
-        const isLight = body.classList.contains('light-theme');
+        if (body.classList.contains('light-theme')) {
+            // Switch to Winter
+            body.classList.remove('light-theme');
+            body.classList.add('winter-theme');
+            themeToggle.innerHTML = `<i data-lucide="snowflake"></i>`;
+            // Start Snowing
+            if (!snowflakeInterval) {
+                snowflakeInterval = setInterval(createSnowflake, 200);
+            }
+        } else if (body.classList.contains('winter-theme')) {
+            // Switch to Dark
+            body.classList.remove('winter-theme');
+            themeToggle.innerHTML = `<i data-lucide="moon"></i>`;
+            // Stop Snowing
+            clearInterval(snowflakeInterval);
+            snowflakeInterval = null;
+            snowContainer.innerHTML = '';
+        } else {
+            // Switch to Light
+            body.classList.add('light-theme');
+            themeToggle.innerHTML = `<i data-lucide="sun"></i>`;
+        }
         
-        // Correctly replace the icon (Lucide replaces the tag, so we must reset innerHTML)
-        const iconName = isLight ? 'sun' : 'moon';
-        themeToggle.innerHTML = `<i data-lucide="${iconName}"></i>`;
         lucide.createIcons();
     });
+}
+
+// Language Translations
+const translations = {
+    en: {
+        profileName: "SHAKIBUL",
+        searchInput: "Search or start new chat",
+        terminal: "Terminal Bot",
+        about: "About Me",
+        skills: "Technical Skills",
+        experience: "Work Experience",
+        projects: "Projects",
+        edu: "Education",
+        personal: "Personal Info",
+        contact: "Contact Me",
+        welcomeText: "You can learn about me using the terminal bot or directly in the private chat box.",
+        encrypted: "End-to-end encrypted",
+        online: "online",
+        typeMsg: "Type a message",
+        refresh: "Refresh",
+        exit: "Exit",
+        modalTitle: "Profile Info",
+        modalStatus: "Student & IT Professional",
+        modalAbout: "About",
+        modalLinkedIn: "LinkedIn",
+        modalPhone: "Phone",
+        viewProfile: "View Profile",
+        lastMsgs: {
+            terminal: "Type 'help' to start...",
+            about: "Hi! I'm Shakibul Hasan Sohag...",
+            skills: "Check out my tech stack!",
+            experience: "IT Professional & ERP Specialist",
+            projects: "View my latest work...",
+            edu: "Academic background...",
+            personal: "Personal details & address...",
+            contact: "Let's get in touch!"
+        }
+    },
+    bn: {
+        profileName: "শাকিবুল",
+        searchInput: "সার্চ করুন বা চ্যাট শুরু করুন",
+        terminal: "টার্মিনাল বট",
+        about: "আমার সম্পর্কে",
+        skills: "টেকনিক্যাল স্কিলস",
+        experience: "কাজের অভিজ্ঞতা",
+        projects: "প্রজেক্টসমূহ",
+        edu: "শিক্ষা",
+        personal: "ব্যক্তিগত তথ্য",
+        contact: "যোগাযোগ",
+        welcomeText: "আপনি টার্মিনাল বট ব্যবহার করে অথবা সরাসরি প্রাইভেট চ্যাট বক্সের মাধ্যমে আমার সম্পর্কে জানতে পারেন।",
+        encrypted: "এন্ড-টু-এন্ড এনক্রিপ্টেড",
+        online: "অনলাইন",
+        typeMsg: "একটি বার্তা লিখুন",
+        refresh: "রিফ্রেশ",
+        exit: "প্রস্থান",
+        modalTitle: "প্রোফাইল তথ্য",
+        modalStatus: "ছাত্র এবং আইটি প্রফেশনাল",
+        modalAbout: "সম্পর্কে",
+        modalLinkedIn: "লিঙ্কডইন",
+        modalPhone: "ফোন",
+        viewProfile: "প্রোফাইল দেখুন",
+        lastMsgs: {
+            terminal: "শুরু করতে 'help' লিখুন...",
+            about: "হাই! আমি শাকিবুল হাসান সোহাগ...",
+            skills: "আমার টেক স্ট্যাক দেখুন!",
+            experience: "আইটি প্রফেশনাল এবং ইআরপি বিশেষজ্ঞ",
+            projects: "আমার সাম্প্রতিক কাজ দেখুন...",
+            edu: "শিক্ষাগত যোগ্যতা...",
+            personal: "ব্যক্তিগত তথ্য ও ঠিকানা...",
+            contact: "যোগাযোগ করুন!"
+        }
+    }
+};
+
+let currentLang = 'en';
+
+function updateLanguage(lang) {
+    currentLang = lang;
+    const t = translations[lang];
+    
+    // Swap Chat Data
+    chatData = lang === 'en' ? chatDataEn : chatDataBn;
+
+    // Sidebar Header
+    document.querySelector('.profile-name').textContent = t.profileName;
+    document.getElementById('searchInput').placeholder = t.searchInput;
+
+    // Chat List
+    document.querySelectorAll('.chat-item').forEach(item => {
+        const chatId = item.getAttribute('data-chat');
+        if (t[chatId]) {
+            item.querySelector('.chat-name').textContent = t[chatId];
+            item.querySelector('.chat-last-msg').textContent = t.lastMsgs[chatId];
+        }
+    });
+
+    // Welcome Screen
+    document.querySelector('.welcome-screen h1').textContent = lang === 'en' ? 'Portfolio' : 'পোর্টফোলিও';
+    document.querySelector('.welcome-screen p').textContent = t.welcomeText;
+    document.querySelector('.welcome-footer span').textContent = t.encrypted;
+
+    // Chat Area (if active)
+    if (currentChatId) {
+        chatTitle.textContent = t[currentChatId];
+        chatStatus.textContent = t.online;
+        
+        // Reload messages in new language
+        messagesContainer.innerHTML = '';
+        chatData[currentChatId].messages.forEach(msg => {
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `message ${msg.type}`;
+            msgDiv.innerHTML = `
+                ${parseMarkdown(msg.text)}
+                <span class="message-time">${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+            `;
+            messagesContainer.appendChild(msgDiv);
+        });
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+    userInput.placeholder = t.typeMsg;
+
+    // Dropdown
+    document.getElementById('refreshBtn').textContent = t.refresh;
+    document.getElementById('exitBtn').textContent = t.exit;
+
+    // Modal
+    document.querySelector('.modal-header span').textContent = t.modalTitle;
+    document.querySelector('.modal-status').textContent = t.modalStatus;
+    
+    const infoItems = document.querySelectorAll('.info-item');
+    if (infoItems.length >= 3) {
+        infoItems[0].querySelector('span').textContent = t.modalAbout;
+        infoItems[1].querySelector('span').textContent = t.modalLinkedIn;
+        infoItems[1].querySelector('a').textContent = t.viewProfile;
+        infoItems[2].querySelector('span').textContent = t.modalPhone;
+    }
 }
 
 // Language Option Logic
 const langToggle = document.getElementById('langToggle');
 langToggle.addEventListener('click', () => {
-    alert("Language options coming soon! Currently supported: English.");
+    const nextLang = currentLang === 'en' ? 'bn' : 'en';
+    updateLanguage(nextLang);
 });
 
 // Initial Load
