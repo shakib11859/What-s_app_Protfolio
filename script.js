@@ -1,4 +1,14 @@
 const chatData = {
+    terminal: {
+        title: "Terminal Bot",
+        icon: "terminal",
+        iconBg: "#1e1e1e",
+        messages: [
+            { type: 'received', text: "Welcome to the Portfolio Terminal! 🖥️" },
+            { type: 'received', text: "Hello! I am Shakibul Hasan Sohag. 👋" },
+            { type: 'received', text: "Available commands:\n• **about** - My background\n• **skills** - Tech stack\n• **exp** - Work experience\n• **projects** - My work\n• **edu** - Education\n• **contact** - Get in touch\n• **clear** - Clear terminal" }
+        ]
+    },
     about: {
         title: "About Me",
         icon: "user",
@@ -73,7 +83,7 @@ const chatData = {
         messages: [
             { type: 'received', text: "Let's connect! 📞" },
             { type: 'received', text: "📧 Email: shakibuls31@gmail.com\n📱 Mobile: +8801873-441561" },
-            { type: 'received', text: "LinkedIn & other social profiles available on request." }
+            { type: 'received', text: "🔗 LinkedIn: [shakibul-hassan](https://www.linkedin.com/in/shakibul-hassan-861054290)" }
         ]
     }
 };
@@ -85,13 +95,24 @@ const chatStatus = document.getElementById('chatStatus');
 const headerProfilePic = document.getElementById('headerProfilePic');
 const userInput = document.getElementById('userInput');
 const sendBtn = document.getElementById('sendBtn');
+const appContainer = document.querySelector('.app-container');
+const backBtn = document.getElementById('backBtn');
+const welcomeScreen = document.getElementById('welcomeScreen');
+const chatHeader = document.querySelector('.chat-header');
+const chatFooter = document.querySelector('.chat-footer');
 
-let currentChatId = 'about';
+let currentChatId = null;
 
 function loadChat(chatId) {
+    // Show Chat UI, Hide Welcome Screen
+    welcomeScreen.style.display = 'none';
+    chatHeader.style.display = 'flex';
+    messagesContainer.style.display = 'flex';
+    chatFooter.style.display = 'flex';
+
     currentChatId = chatId;
     const chat = chatData[chatId];
-    
+
     // Update Header
     chatTitle.innerText = chat.title;
     headerProfilePic.innerHTML = `
@@ -103,28 +124,40 @@ function loadChat(chatId) {
 
     // Clear and Load Messages
     messagesContainer.innerHTML = '';
-    showMessages(chat.messages);
+    showMessages(chat.messages, chatId);
+
+    // Mobile navigation
+    if (window.innerWidth <= 768) {
+        appContainer.classList.add('show-chat');
+    }
 }
 
-async function showMessages(messages) {
+async function showMessages(messages, chatId) {
     chatStatus.innerText = 'typing...';
-    
+
     for (const msg of messages) {
+        if (currentChatId !== chatId) return;
         await new Promise(resolve => setTimeout(resolve, 800)); // Simulate typing delay
+        if (currentChatId !== chatId) return;
         addMessage(msg.text, msg.type);
         messagesContainer.scrollTop = messagesContainer.scrollHeight;
     }
-    
-    chatStatus.innerText = 'online';
+
+    if (currentChatId === chatId) {
+        chatStatus.innerText = 'online';
+    }
 }
 
 function addMessage(text, type) {
-    const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     const msgDiv = document.createElement('div');
     msgDiv.className = `message ${type}`;
+
+    // Process text: handle newlines and simple markdown links [text](url)
+    let processedText = text.replace(/\n/g, '<br>');
+    processedText = processedText.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" style="color: #53bdeb; text-decoration: underline;">$1</a>');
+
     msgDiv.innerHTML = `
-        ${text.replace(/\n/g, '<br>')}
-        <span class="message-time">${time}</span>
+        ${processedText}
     `;
     messagesContainer.appendChild(msgDiv);
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
@@ -143,17 +176,31 @@ chatList.addEventListener('click', (e) => {
     const chatId = chatItem.getAttribute('data-chat');
     if (chatId !== currentChatId) {
         loadChat(chatId);
+    } else {
+        // If same chat, still show on mobile
+        if (window.innerWidth <= 768) {
+            appContainer.classList.add('show-chat');
+        }
     }
 });
 
+backBtn.addEventListener('click', () => {
+    appContainer.classList.remove('show-chat');
+});
+
 function handleSendMessage() {
-    const text = userInput.value.trim();
+    const text = userInput.value.trim().toLowerCase();
     if (!text) return;
 
-    addMessage(text, 'sent');
+    addMessage(userInput.value, 'sent');
     userInput.value = '';
-    
-    // Simple Auto-reply
+
+    if (currentChatId === 'terminal') {
+        processTerminalCommand(text);
+        return;
+    }
+
+    // Simple Auto-reply for other chats
     setTimeout(() => {
         chatStatus.innerText = 'typing...';
         setTimeout(() => {
@@ -163,13 +210,95 @@ function handleSendMessage() {
     }, 500);
 }
 
+function processTerminalCommand(cmd) {
+    setTimeout(() => {
+        chatStatus.innerText = 'typing...';
+        setTimeout(() => {
+            let response = "";
+            switch (cmd) {
+                case 'help':
+                    response = "Available commands:\n• **about** - My background\n• **skills** - Tech stack\n• **exp** - Work experience\n• **projects** - My work\n• **edu** - Education\n• **contact** - Get in touch\n• **clear** - Clear terminal";
+                    break;
+                case 'about':
+                    response = chatData.about.messages.map(m => m.text).join('\n\n');
+                    break;
+                case 'skills':
+                    response = chatData.skills.messages.map(m => m.text).join('\n\n');
+                    break;
+                case 'exp':
+                case 'experience':
+                    response = chatData.experience.messages.map(m => m.text).join('\n\n');
+                    break;
+                case 'projects':
+                    response = chatData.projects.messages.map(m => m.text).join('\n\n');
+                    break;
+                case 'edu':
+                case 'education':
+                    response = chatData.education.messages.map(m => m.text).join('\n\n');
+                    break;
+                case 'contact':
+                    response = chatData.contact.messages.map(m => m.text).join('\n\n');
+                    break;
+                case 'clear':
+                    messagesContainer.innerHTML = '';
+                    chatStatus.innerText = 'online';
+                    return;
+                default:
+                    response = "Unknown command: '" + cmd + "'. Type **help** to see all commands.";
+            }
+            addMessage(response, 'received');
+            chatStatus.innerText = 'online';
+        }, 1000);
+    }, 500);
+}
+
 userInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') handleSendMessage();
 });
 
 sendBtn.addEventListener('click', handleSendMessage);
 
+// Search Filter Logic
+const searchInput = document.getElementById('searchInput');
+searchInput.addEventListener('input', (e) => {
+    const query = e.target.value.toLowerCase();
+    const chatItems = document.querySelectorAll('.chat-item');
+    
+    chatItems.forEach(item => {
+        const name = item.querySelector('.chat-name').innerText.toLowerCase();
+        if (name.includes(query)) {
+            item.style.display = 'flex';
+        } else {
+            item.style.display = 'none';
+        }
+    });
+});
+
+// Modal Logic
+function initProfileModal() {
+    const sidebarProfilePic = document.getElementById('sidebarProfilePic');
+    const profileModal = document.getElementById('profileModal');
+    const closeModal = document.getElementById('closeModal');
+
+    if (sidebarProfilePic && profileModal && closeModal) {
+        sidebarProfilePic.addEventListener('click', () => {
+            profileModal.style.display = 'flex';
+        });
+
+        closeModal.addEventListener('click', () => {
+            profileModal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === profileModal) {
+                profileModal.style.display = 'none';
+            }
+        });
+    }
+}
+
 // Initial Load
 window.onload = () => {
-    loadChat('about');
+    lucide.createIcons();
+    initProfileModal();
 };
