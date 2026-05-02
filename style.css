@@ -563,6 +563,14 @@ body:not(.light-theme) #themeToggle i {
 }
 
 @media (max-width: 768px) {
+    body {
+        height: 100dvh; /* Better for mobile browsers */
+    }
+
+    .app-container {
+        height: 100dvh;
+    }
+
     .back-btn-container {
         display: flex;
     }
@@ -574,6 +582,10 @@ body:not(.light-theme) #themeToggle i {
         height: 100%;
         z-index: 20;
         transition: transform 0.3s ease;
+    }
+
+    .sidebar-header, .chat-header {
+        height: 54px; /* Slightly shorter for mobile */
     }
 
     .main-chat {
@@ -595,7 +607,7 @@ body:not(.light-theme) #themeToggle i {
     }
 
     .messages-container {
-        padding: 20px 4%;
+        padding: 15px 4%; /* Slightly less padding */
     }
 
     .message {
