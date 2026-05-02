@@ -101,6 +101,14 @@ const welcomeScreen = document.getElementById('welcomeScreen');
 const chatHeader = document.querySelector('.chat-header');
 const chatFooter = document.querySelector('.chat-footer');
 
+// Mobile Navigation Logic (Moved to top for reliability)
+function goBackToSidebar() {
+    const container = document.querySelector('.app-container');
+    if (container) {
+        container.classList.remove('show-chat');
+    }
+}
+
 let currentChatId = null;
 
 function loadChat(chatId) {
@@ -184,8 +192,11 @@ chatList.addEventListener('click', (e) => {
     }
 });
 
-backBtn.addEventListener('click', () => {
-    appContainer.classList.remove('show-chat');
+// Robust Mobile Navigation Listener
+document.addEventListener('click', (e) => {
+    if (e.target.closest('#backBtn')) {
+        goBackToSidebar();
+    }
 });
 
 function handleSendMessage() {
@@ -296,6 +307,60 @@ function initProfileModal() {
         });
     }
 }
+
+// Dropdown Menu Logic (Robust Delegation)
+document.addEventListener('click', (e) => {
+    const menuBtn = document.getElementById('menuBtn');
+    const menuDropdown = document.getElementById('menuDropdown');
+    
+    // Toggle dropdown
+    if (e.target.closest('#menuBtn')) {
+        e.stopPropagation();
+        menuDropdown.classList.toggle('show-dropdown');
+        return;
+    }
+
+    // Refresh button
+    if (e.target.closest('#refreshBtn')) {
+        e.preventDefault();
+        location.reload();
+        return;
+    }
+
+    // Exit button
+    if (e.target.closest('#exitBtn')) {
+        e.preventDefault();
+        window.location.href = '404 Page Not Found/index.html'; 
+        return;
+    }
+
+    // Close dropdown when clicking anywhere else
+    if (menuDropdown && menuDropdown.classList.contains('show-dropdown')) {
+        menuDropdown.classList.remove('show-dropdown');
+    }
+});
+
+// Theme Toggle Logic
+const themeToggle = document.getElementById('themeToggle');
+if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+        const body = document.body;
+        body.classList.toggle('light-theme');
+        
+        const isLight = body.classList.contains('light-theme');
+        
+        // Correctly replace the icon (Lucide replaces the tag, so we must reset innerHTML)
+        const iconName = isLight ? 'sun' : 'moon';
+        themeToggle.innerHTML = `<i data-lucide="${iconName}"></i>`;
+        lucide.createIcons();
+    });
+}
+
+// Language Option Logic
+const langToggle = document.getElementById('langToggle');
+langToggle.addEventListener('click', () => {
+    alert("Language options coming soon! Currently supported: English.");
+});
 
 // Initial Load
 window.onload = () => {
