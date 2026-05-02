@@ -27,6 +27,22 @@
     --text-accent: #00a884;
     --bubble-in: #ffffff;
     --bubble-out: #dcf8c6;
+    --accent: #00a884;
+}
+
+.winter-theme {
+    --bg-main: #e3f2fd;
+    --bg-sidebar: #ffffff;
+    --bg-header: #bbdefb;
+    --bg-chat: #f0f8ff;
+    --input-bg: #ffffff;
+    --border: #e1f5fe;
+    --text-primary: #01579b;
+    --text-secondary: #0288d1;
+    --text-accent: #03a9f4;
+    --bubble-in: #ffffff;
+    --bubble-out: #b3e5fc;
+    --accent: #03a9f4;
 }
 
 * {
@@ -43,8 +59,125 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: all 0.3s ease;
     overflow: hidden;
+}
+
+/* Theme Visuals Container */
+.theme-visuals {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 2;
+}
+
+/* ☀️ Day Mode: Pulsing Sun */
+.sun-animation {
+    display: none;
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle, #ffb100 0%, #ff8f00 100%);
+    border-radius: 50%;
+    box-shadow: 0 0 50px #ffb100, 0 0 100px rgba(255, 177, 0, 0.4);
+    animation: sunRise 6s ease-out infinite alternate;
+}
+
+.light-theme .sun-animation {
+    display: block;
+}
+
+@keyframes sunRise {
+    0% { transform: translateY(20px) scale(0.9); opacity: 0.7; }
+    100% { transform: translateY(0) scale(1.1); opacity: 1; box-shadow: 0 0 70px #ffb100, 0 0 130px rgba(255, 177, 0, 0.6); }
+}
+
+/* 🌙 Night Mode: Twinkling Moon & Stars */
+.moon-animation {
+    display: none;
+    position: absolute;
+    top: 40px;
+    right: 60px;
+    width: 60px;
+    height: 60px;
+    background: #aebac1;
+    border-radius: 50%;
+    box-shadow: 0 0 30px #aebac1, 0 0 60px rgba(174, 186, 193, 0.3);
+    animation: moonFloat 8s ease-in-out infinite alternate;
+}
+
+body:not(.light-theme):not(.winter-theme) .moon-animation {
+    display: block;
+}
+
+@keyframes moonFloat {
+    0% { transform: translateY(10px) rotate(-5deg); opacity: 0.8; }
+    100% { transform: translateY(0) rotate(5deg); opacity: 1; }
+}
+
+.stars-animation {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+body:not(.light-theme):not(.winter-theme) .stars-animation {
+    display: block;
+}
+
+.stars-animation::before {
+    content: "";
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 
+        15vw 10vh 2px #aebac1, 25vw 35vh 1px #aebac1, 35vw 15vh 3px #aebac1, 
+        45vw 50vh 1px #aebac1, 55vw 25vh 2px #aebac1, 65vw 65vh 1px #aebac1, 
+        75vw 35vh 3px #aebac1, 85vw 55vh 1px #aebac1, 95vw 15vh 2px #aebac1,
+        10vw 75vh 1px #aebac1, 40vw 90vh 3px #aebac1, 70vw 80vh 1px #aebac1, 
+        90vw 95vh 2px #aebac1, 50vw 30vh 1px #aebac1, 80vw 15vh 3px #aebac1;
+    animation: twinkle 4s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.3; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* ❄️ Winter Theme: Snowfall */
+.snow-container {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.winter-theme .snow-container {
+    display: block;
+}
+
+.snowflake {
+    position: absolute;
+    top: -10px;
+    color: #03a9f4;
+    font-size: 1.5em;
+    animation: fall linear infinite;
+    text-shadow: 0 0 8px rgba(3, 169, 244, 0.6);
+}
+
+@keyframes fall {
+    to { transform: translateY(105vh) translateX(30px) rotate(360deg); }
 }
 
 .app-container {
@@ -56,6 +189,7 @@ body {
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
     position: relative;
     overflow: hidden;
+    z-index: 10;
 }
 
 /* Sidebar */
@@ -138,8 +272,14 @@ body {
     color: #ffb100 !important; /* Golden Sun */
 }
 
-body:not(.light-theme) #themeToggle svg,
-body:not(.light-theme) #themeToggle i {
+.winter-theme #themeToggle svg,
+.winter-theme #themeToggle i {
+    color: #03a9f4 !important; /* Blue Snowflake */
+}
+
+/* Night Mode (No special theme class) */
+body:not(.light-theme):not(.winter-theme) #themeToggle svg,
+body:not(.light-theme):not(.winter-theme) #themeToggle i {
     color: #aebac1 !important; /* Silver Moon */
 }
 
@@ -408,7 +548,7 @@ body:not(.light-theme) #themeToggle i {
     align-items: center;
     justify-content: center;
     text-align: center;
-    background-color: var(--bg-chat);
+    background-color: transparent;
     z-index: 5;
     border-bottom: 6px solid #009999;
 }
