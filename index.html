@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp | Shakibul Hasan Sohag</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <header class="sidebar-header">
+                <div class="profile-pic">
+                    <img src="01.jpg" alt="Shakibul Hasan Sohag">
+                </div>
+                <div class="header-icons">
+                    <i data-lucide="users-2"></i>
+                    <i data-lucide="circle-dashed"></i>
+                    <i data-lucide="message-square-plus"></i>
+                    <i data-lucide="more-vertical"></i>
+                </div>
+            </header>
+
+            <div class="search-container">
+                <div class="search-bar">
+                    <i data-lucide="search" style="width: 18px; height: 18px; color: var(--text-secondary);"></i>
+                    <input type="text" placeholder="Search or start new chat">
+                </div>
+            </div>
+
+            <div class="chat-list" id="chatList">
+                <div class="chat-item active" data-chat="about">
+                    <div class="profile-pic">
+                        <div style="background: var(--accent); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                            <i data-lucide="user" style="color: white;"></i>
+                        </div>
+                    </div>
+                    <div class="chat-item-info">
+                        <div class="chat-item-header">
+                            <span class="chat-name">About Me</span>
+                            <span class="chat-time">10:58 AM</span>
+                        </div>
+                        <div class="chat-last-msg">Hi! I'm Shakibul Hasan Sohag...</div>
+                    </div>
+                </div>
+
+                <div class="chat-item" data-chat="skills">
+                    <div class="profile-pic">
+                        <div style="background: #34b7f1; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                            <i data-lucide="code-2" style="color: white;"></i>
+                        </div>
+                    </div>
+                    <div class="chat-item-info">
+                        <div class="chat-item-header">
+                            <span class="chat-name">Technical Skills</span>
+                            <span class="chat-time">Yesterday</span>
+                        </div>
+                        <div class="chat-last-msg">Check out my tech stack!</div>
+                    </div>
+                </div>
+
+                <div class="chat-item" data-chat="experience">
+                    <div class="profile-pic">
+                        <div style="background: #ffbc2c; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                            <i data-lucide="briefcase" style="color: white;"></i>
+                        </div>
+                    </div>
+                    <div class="chat-item-info">
+                        <div class="chat-item-header">
+                            <span class="chat-name">Work Experience</span>
+                            <span class="chat-time">Tuesday</span>
+                        </div>
+                        <div class="chat-last-msg">IT Professional & ERP Specialist</div>
+                    </div>
+                </div>
+
+                <div class="chat-item" data-chat="projects">
+                    <div class="profile-pic">
+                        <div style="background: #ff2c74; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                            <i data-lucide="layers" style="color: white;"></i>
+                        </div>
+                    </div>
+                    <div class="chat-item-info">
+                        <div class="chat-item-header">
+                            <span class="chat-name">Projects</span>
+                            <span class="chat-time">Monday</span>
+                        </div>
+                        <div class="chat-last-msg">View my latest work...</div>
+                    </div>
+                </div>
+
+                <div class="chat-item" data-chat="education">
+                    <div class="profile-pic">
+                        <div style="background: #a450ff; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                            <i data-lucide="graduation-cap" style="color: white;"></i>
+                        </div>
+                    </div>
+                    <div class="chat-item-info">
+                        <div class="chat-item-header">
+                            <span class="chat-name">Education</span>
+                            <span class="chat-time">12/05/23</span>
+                        </div>
+                        <div class="chat-last-msg">Academic background...</div>
+                    </div>
+                </div>
+
+                <div class="chat-item" data-chat="personal">
+                    <div class="profile-pic">
+                        <div style="background: #007bff; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                            <i data-lucide="info" style="color: white;"></i>
+                        </div>
+                    </div>
+                    <div class="chat-item-info">
+                        <div class="chat-item-header">
+                            <span class="chat-name">Personal Info</span>
+                            <span class="chat-time">10:45 AM</span>
+                        </div>
+                        <div class="chat-last-msg">Personal details & address...</div>
+                    </div>
+                </div>
+
+                <div class="chat-item" data-chat="contact">
+                    <div class="profile-pic">
+                        <div style="background: #25d366; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                            <i data-lucide="phone" style="color: white;"></i>
+                        </div>
+                    </div>
+                    <div class="chat-item-info">
+                        <div class="chat-item-header">
+                            <span class="chat-name">Contact Me</span>
+                            <span class="chat-time">Just now</span>
+                        </div>
+                        <div class="chat-last-msg">Let's get in touch!</div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Chat Area -->
+        <main class="main-chat">
+            <header class="chat-header">
+                <div class="profile-pic" id="headerProfilePic">
+                    <div style="background: var(--accent); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                        <i data-lucide="user" style="color: white; width: 24px; height: 24px;"></i>
+                    </div>
+                </div>
+                <div class="chat-header-info">
+                    <div class="current-chat-name" id="chatTitle">About Me</div>
+                    <div class="current-chat-status" id="chatStatus">online</div>
+                </div>
+                <div class="header-icons">
+                    <i data-lucide="search"></i>
+                    <i data-lucide="more-vertical"></i>
+                </div>
+            </header>
+
+            <div class="messages-container" id="messagesContainer">
+                <!-- Messages will be injected here -->
+            </div>
+
+            <footer class="chat-footer">
+                <i data-lucide="smile" class="footer-icon"></i>
+                <i data-lucide="paperclip" class="footer-icon"></i>
+                <div class="input-container">
+                    <input type="text" id="userInput" placeholder="Type a message">
+                </div>
+                <i data-lucide="mic" class="footer-icon" id="sendBtn"></i>
+            </footer>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
