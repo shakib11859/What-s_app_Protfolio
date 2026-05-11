@@ -244,7 +244,8 @@ async function showMessages(messages, chatId) {
     }
 
     if (currentChatId === chatId) {
-        chatStatus.innerText = 'online';
+        const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
+        chatStatus.innerText = `${translations[currentLang].lastSeen} ${time}`;
     }
 }
 
@@ -252,12 +253,12 @@ function addMessage(text, type) {
     const msgDiv = document.createElement('div');
     msgDiv.className = `message ${type}`;
 
-    // Process text: handle newlines and simple markdown links [text](url)
-    let processedText = text.replace(/\n/g, '<br>');
-    processedText = processedText.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" style="color: #53bdeb; text-decoration: underline;">$1</a>');
+    const processedText = parseMarkdown(text);
 
+    const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
     msgDiv.innerHTML = `
-        ${processedText}
+        <div class="message-content">${processedText}</div>
+        <span class="message-time">${time}</span>
     `;
     messagesContainer.appendChild(msgDiv);
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
@@ -308,7 +309,8 @@ function handleSendMessage() {
         chatStatus.innerText = 'typing...';
         setTimeout(() => {
             addMessage("Thanks for your message! This is a portfolio bot. Please select a chat from the sidebar to learn more about me.", 'received');
-            chatStatus.innerText = 'online';
+            const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
+            chatStatus.innerText = `${translations[currentLang].lastSeen} ${time}`;
         }, 1500);
     }, 500);
 }
@@ -350,7 +352,8 @@ function processTerminalCommand(cmd) {
                     response = "Unknown command: '" + cmd + "'. Type **help** to see all commands.";
             }
             addMessage(response, 'received');
-            chatStatus.innerText = 'online';
+            const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
+            chatStatus.innerText = `${translations[currentLang].lastSeen} ${time}`;
         }, 1000);
     }, 500);
 }
@@ -520,7 +523,7 @@ const translations = {
         contact: "Contact Me",
         welcomeText: "You can learn about me using the terminal bot or directly in the private chat box.",
         encrypted: "End-to-end encrypted",
-        online: "online",
+        lastSeen: "last seen today at",
         typeMsg: "Type a message",
         refresh: "Refresh",
         exit: "Exit",
@@ -554,7 +557,7 @@ const translations = {
         contact: "যোগাযোগ",
         welcomeText: "আপনি টার্মিনাল বট ব্যবহার করে অথবা সরাসরি প্রাইভেট চ্যাট বক্সের মাধ্যমে আমার সম্পর্কে জানতে পারেন।",
         encrypted: "এন্ড-টু-এন্ড এনক্রিপ্টেড",
-        online: "অনলাইন",
+        lastSeen: "আজ দেখা গেছে",
         typeMsg: "একটি বার্তা লিখুন",
         refresh: "রিফ্রেশ",
         exit: "প্রস্থান",
@@ -607,7 +610,8 @@ function updateLanguage(lang) {
     // Chat Area (if active)
     if (currentChatId) {
         chatTitle.textContent = t[currentChatId];
-        chatStatus.textContent = t.online;
+        const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
+        chatStatus.textContent = `${t.lastSeen} ${time}`;
         
         // Reload messages in new language
         messagesContainer.innerHTML = '';
@@ -615,8 +619,8 @@ function updateLanguage(lang) {
             const msgDiv = document.createElement('div');
             msgDiv.className = `message ${msg.type}`;
             msgDiv.innerHTML = `
-                ${parseMarkdown(msg.text)}
-                <span class="message-time">${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                <div class="message-content">${parseMarkdown(msg.text)}</div>
+                <span class="message-time">${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false })}</span>
             `;
             messagesContainer.appendChild(msgDiv);
         });
@@ -641,6 +645,16 @@ function updateLanguage(lang) {
     }
 }
 
+function parseMarkdown(text) {
+    if (!text) return "";
+    let processedText = text.replace(/\n/g, '<br>');
+    // Handle bold: **text**
+    processedText = processedText.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+    // Handle links: [text](url)
+    processedText = processedText.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" style="color: #53bdeb; text-decoration: underline;">$1</a>');
+    return processedText;
+}
+
 // Language Option Logic
 const langToggle = document.getElementById('langToggle');
 langToggle.addEventListener('click', () => {
@@ -652,6 +666,53 @@ langToggle.addEventListener('click', () => {
 window.onload = () => {
     lucide.createIcons();
     initProfileModal();
+    initEmojiPicker(); // Initialize Emoji Picker
     applyTheme('night'); // Default theme: Night
 };
+
+// Emoji Picker Implementation
+function initEmojiPicker() {
+    const emojiBtn = document.getElementById('emojiBtn');
+    const emojiPicker = document.getElementById('emojiPicker');
+    const userInput = document.getElementById('userInput');
+
+    if (!emojiBtn || !emojiPicker) return;
+
+    const emojis = [
+        '😀', '😃', '😄', '😁', '😅', '😂', '🤣', '😊', '😇', '🙂', '🙃', '😉', '😌', '😍', '🥰', '😘', '😗', '😙', '😚', '😋', '😛', '😝', '😜', '🤪', '🤨', '🧐', '🤓', '😎', '🤩', '🥳', '😏', '😒', '😞', '😔', '😟', '😕', '🙁', '☹️', '😣', '😖', '😫', '😩', '🥺', '😢', '😭', '😤', '😠', '😡', '🤬', '🤯', '😳', '🥵', '🥶', '😱', '😨', '😰', '😥', '😓', '🤗', '🤔', '🤭', '🤫', '🤥', '😶', '😐', '😑', '😬', '🙄', '😯', '😦', '😧', '😮', '😲', '🥱', '😴', '🤤', '😪', '😵', '🤐', '🥴', '🤢', '🤮', '🤧', '😷', '🤒', '🤕', '🤑', '🤠', '😈', '👿', '👹', '👺', '🤡', '👻', '💀', '☠️', '👽', '👾', '🤖', '🎃', '😺', '😸', '😹', '😻', '😼', '😽', '🙀', '😿', '😾', '👋', '🤚', '🖐', '✋', '🖖', '👌', '🤏', '✌️', '🤞', '🤟', '🤘', '🤙', '👈', '👉', '👆', '🖕', '👇', '☝️', '👍', '👎', '✊', '👊', '🤛', '🤜', '👏', '🙌', '👐', '🤲', '🤝', '🙏', '✍️', '💅', '🤳', '💪', '🦾', '🦵', '🦿', '🦶', '👂', '🦻', '👃', '🧠', '🦷', '🦴', '👀', '👁', '👅', '👄', '💋', '🩸'
+    ];
+
+    // Create Picker Content
+    emojiPicker.innerHTML = `
+        <div class="emoji-picker-header">Recent Emojis</div>
+        <div class="emoji-grid">
+            ${emojis.map(emoji => `<span class="emoji-item">${emoji}</span>`).join('')}
+        </div>
+    `;
+
+    // Toggle Picker
+    emojiBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        emojiPicker.classList.toggle('show');
+    });
+
+    // Select Emoji
+    emojiPicker.addEventListener('click', (e) => {
+        const item = e.target.closest('.emoji-item');
+        if (!item) return;
+
+        const emoji = item.innerText;
+        userInput.value += emoji;
+        userInput.focus();
+    });
+
+    // Close Picker when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.emoji-picker-container')) {
+            emojiPicker.classList.remove('show');
+        }
+    });
+}
+
 
